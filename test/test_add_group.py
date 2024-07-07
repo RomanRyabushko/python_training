@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import pytest
-from group import Group
-from contact import Contact
-from application import Application
+from model.group import Group
+from model.contact import Contact
+from fixture.application import Application
 
 
 @pytest.fixture
