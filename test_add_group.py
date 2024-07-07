@@ -51,7 +51,7 @@ class TestAddGroup(unittest.TestCase):
         wd.find_element(By.LINK_TEXT, "group page").click()
 
     def return_to_home_page(self, wd):
-        # return to groups page
+        # return to home page
         wd.find_element(By.XPATH, "//*[text() = 'home']").click()
 
     def create_group(self, wd, group):
@@ -82,7 +82,7 @@ class TestAddGroup(unittest.TestCase):
         wd.find_element(By.NAME, "address").click()
         wd.find_element(By.NAME, "address").clear()
         wd.find_element(By.NAME, "address").send_keys(contact.address)
-        # submit group creation
+        # submit contact creation
         wd.find_element(By.NAME, "submit").click()
 
     def open_groups_page(self, wd):
@@ -90,16 +90,16 @@ class TestAddGroup(unittest.TestCase):
         wd.find_element(By.LINK_TEXT, "groups").click()
 
     def open_addnew_contact_page(self, wd):
-        # open groups page
+        # open add new contact page
         wd.find_element(By.LINK_TEXT, "add new").click()
 
     def login(self, wd, username, password):
         wd.find_element(By.NAME, "user").click()
         wd.find_element(By.NAME, "user").clear()
-        wd.find_element(By.NAME, "user").send_keys("%s" % username)
+        wd.find_element(By.NAME, "user").send_keys(username)
         wd.find_element(By.NAME, "pass").click()
         wd.find_element(By.NAME, "pass").clear()
-        wd.find_element(By.NAME, "pass").send_keys("%s" % password)
+        wd.find_element(By.NAME, "pass").send_keys(password)
         wd.find_element(By.XPATH, "//input[@value='Login']").click()
 
     def open_home_page(self, wd):
