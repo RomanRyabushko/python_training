@@ -7,6 +7,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest, time, re
 from group import Group
+from contact import Contact
 class TestAddGroup(unittest.TestCase):
     def setUp(self):
         self.wd = webdriver.Firefox()
@@ -31,6 +32,15 @@ class TestAddGroup(unittest.TestCase):
             self.return_to_groups_page(wd)
             self.logout(wd)
 
+    def test_add_contact(self):
+        wd = self.wd
+        self.open_home_page(wd)
+        self.login(wd, username="admin", password="secret")
+        self.open_addnew_contact_page(wd)
+        self.create_contact(wd, Contact(firstname="1", lastname="2", address="3"))
+        self.return_to_home_page(wd)
+        self.logout(wd)
+
 
     def logout(self, wd):
         # logout
@@ -39,6 +49,10 @@ class TestAddGroup(unittest.TestCase):
     def return_to_groups_page(self, wd):
         # return to groups page
         wd.find_element(By.LINK_TEXT, "group page").click()
+
+    def return_to_home_page(self, wd):
+        # return to groups page
+        wd.find_element(By.XPATH, "//*[text() = 'home']").click()
 
     def create_group(self, wd, group):
         # init group creation
@@ -56,9 +70,28 @@ class TestAddGroup(unittest.TestCase):
         # submit group creation
         wd.find_element(By.NAME, "submit").click()
 
+    def create_contact(self, wd, contact):
+
+        # fill contact form
+        wd.find_element(By.NAME, "firstname").click()
+        wd.find_element(By.NAME, "firstname").clear()
+        wd.find_element(By.NAME, "firstname").send_keys(contact.firstname)
+        wd.find_element(By.NAME, "lastname").click()
+        wd.find_element(By.NAME, "lastname").clear()
+        wd.find_element(By.NAME, "lastname").send_keys(contact.lastname)
+        wd.find_element(By.NAME, "address").click()
+        wd.find_element(By.NAME, "address").clear()
+        wd.find_element(By.NAME, "address").send_keys(contact.address)
+        # submit group creation
+        wd.find_element(By.NAME, "submit").click()
+
     def open_groups_page(self, wd):
         # open groups page
         wd.find_element(By.LINK_TEXT, "groups").click()
+
+    def open_addnew_contact_page(self, wd):
+        # open groups page
+        wd.find_element(By.LINK_TEXT, "add new").click()
 
     def login(self, wd, username, password):
         wd.find_element(By.NAME, "user").click()
