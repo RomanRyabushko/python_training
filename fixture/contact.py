@@ -25,6 +25,15 @@ class ContactHelper:
         self.return_to_home_page()
 
     def return_to_home_page(self):
-            wd = self.app.wd
-            # return to home page
-            wd.find_element(By.XPATH, "//*[text() = 'home']").click()
+        wd = self.app.wd
+        # return to home page
+        wd.find_element(By.XPATH, "//*[text() = 'home']").click()
+
+    def test_del_first_contact(self):
+        wd = self.app.wd
+        self.open_add_new_contact_page()
+        # select first contact
+        wd.find_element(By.NAME, "selected[]").click()
+        # submit deletion
+        wd.find_element(By.NAME, "delete").click()
+        self.return_to_home_page()
