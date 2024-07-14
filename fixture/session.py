@@ -1,4 +1,6 @@
 from selenium.webdriver.common.by import By
+
+
 class SessionHelper:
 
     def __init__(self, app):
@@ -19,4 +21,4 @@ class SessionHelper:
         wd = self.app.wd
         # logout
         wd.find_element(By.LINK_TEXT, "Logout").click()
-        wd.find_element(By.NAME,"user")
+        wd.find_element(By.NAME, "user")
