@@ -26,6 +26,7 @@ class ContactHelper:
 
     def test_del_first_contact(self):
         wd = self.app.wd
+        self.return_to_home_page()
         wd.find_element(By.XPATH, "//*[text() = 'home']")
         # select first contact
         wd.find_element(By.NAME, "selected[]").click()
@@ -47,10 +48,11 @@ class ContactHelper:
 
     def test_modify_first_contact(self, new_contact_data):
         wd = self.app.wd
+        self.return_to_home_page()
         wd.find_element(By.XPATH, "//*[text() = 'home']")
         wd.find_element(By.NAME, "selected[]").click()
         # submit deletion
-        wd.find_element(By.XPATH, "//*[@title= 'Edit' and @alt= 'Edit']").click()
+        wd.find_element(By.XPATH, "(//*[@title= 'Edit' and @alt= 'Edit'])[1]").click()
         self.fill_contact_form(new_contact_data)
         wd.find_element(By.NAME, "update").click()
         self.return_to_home_page()
