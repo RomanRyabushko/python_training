@@ -56,3 +56,8 @@ class ContactHelper:
         self.fill_contact_form(new_contact_data)
         wd.find_element(By.NAME, "update").click()
         self.return_to_home_page()
+
+    def count(self):
+        wd = self.app.wd
+        self.return_to_home_page()
+        return len(wd.find_elements(By.XPATH, "//*[@type = 'checkbox' and @name = 'selected[]']"))
