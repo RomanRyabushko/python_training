@@ -12,8 +12,8 @@ class ContactHelper:
 
     def return_to_home_page(self):
         wd = self.app.wd
-        # return to home page
-        wd.find_element(By.XPATH, "//*[text() = 'home']").click()
+        if not (len(wd.find_elements(By.XPATH, "//*[text() = 'Select all']")) > 0):
+            wd.find_element(By.XPATH, "//*[text() = 'home']").click()
 
     def create(self, contact):
         wd = self.app.wd
