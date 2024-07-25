@@ -24,6 +24,7 @@ class ContactHelper:
         # submit contact creation
         wd.find_element(By.NAME, "submit").click()
         self.return_to_home_page()
+        self.contact_cache = None
 
     def test_del_first_contact(self):
         wd = self.app.wd
@@ -34,6 +35,7 @@ class ContactHelper:
         # submit deletion
         wd.find_element(By.XPATH, "//*[@value = 'Delete' and @onclick = 'DeleteSel()']").click()
         self.return_to_home_page()
+        self.contact_cache = None
 
     def change_field_value(self, field_name, text):
         wd = self.app.wd
@@ -57,18 +59,22 @@ class ContactHelper:
         self.fill_contact_form(new_contact_data)
         wd.find_element(By.NAME, "update").click()
         self.return_to_home_page()
+        self.contact_cache = None
 
     def count(self):
         wd = self.app.wd
         self.return_to_home_page()
         return len(wd.find_elements(By.XPATH, "//*[@type = 'checkbox' and @name = 'selected[]']"))
 
+    contact_cache = None
+
     def get_contact_list(self):
-        wd = self.app.wd
-        self.return_to_home_page()
-        contacts = []
-        for element in wd.find_elements(By.XPATH, "//*[@name = 'entry']/td[3]"):
-            text = element.text
-            id = element.find_element(By.XPATH, "//*[@name = 'selected[]']").get_attribute("value")
-            contacts.append(Contact(firstname=text, id=id))
-        return contacts
+        if self.contact_cache is None:
+            wd = self.app.wd
+            self.return_to_home_page()
+            self.contact_cache = []
+            for element in wd.find_elements(By.XPATH, "//*[@name = 'entry']/td[3]"):
+                text = element.text
+                id = element.find_element(By.XPATH, "//*[@name = 'selected[]']").get_attribute("value")
+                self.contact_cache.append(Contact(firstname=text, id=id))
+        return list(self.contact_cache)
