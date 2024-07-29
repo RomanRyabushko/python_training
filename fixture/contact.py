@@ -37,6 +37,21 @@ class ContactHelper:
         self.return_to_home_page()
         self.contact_cache = None
 
+    def test_del_contact_by_index(self, index):
+        wd = self.app.wd
+        self.return_to_home_page()
+        wd.find_element(By.XPATH, "//*[text() = 'home']")
+        # select contact by index
+        self.select_contact_by_index(index)
+        # submit deletion
+        wd.find_element(By.XPATH, "//*[@value = 'Delete' and @onclick = 'DeleteSel()']").click()
+        self.return_to_home_page()
+        self.contact_cache = None
+
+    def select_contact_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements(By.NAME, "selected[]")[index].click()
+
     def change_field_value(self, field_name, text):
         wd = self.app.wd
         if text is not None:
@@ -60,6 +75,19 @@ class ContactHelper:
         wd.find_element(By.NAME, "update").click()
         self.return_to_home_page()
         self.contact_cache = None
+
+    def modify_contact_by_index(self, index, new_contact_data):
+        wd = self.app.wd
+        self.return_to_home_page()
+        wd.find_element(By.XPATH, "//*[text() = 'home']")
+        self.select_contact_by_index(index)
+        # submit deletion
+        wd.find_element(By.XPATH, "(//*[@title= 'Edit' and @alt= 'Edit'])[1]").click()
+        self.fill_contact_form(new_contact_data)
+        wd.find_element(By.NAME, "update").click()
+        self.return_to_home_page()
+        self.contact_cache = None
+
 
     def count(self):
         wd = self.app.wd
