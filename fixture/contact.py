@@ -80,9 +80,8 @@ class ContactHelper:
         wd = self.app.wd
         self.return_to_home_page()
         wd.find_element(By.XPATH, "//*[text() = 'home']")
-        self.select_contact_by_index(index)
-        # submit deletion
-        wd.find_element(By.XPATH, "(//*[@title= 'Edit' and @alt= 'Edit'])[1]").click()
+        index = str(index)
+        wd.find_element(By.XPATH, "(//*[@title= 'Edit' and @alt= 'Edit'])["+index+"]").click()
         self.fill_contact_form(new_contact_data)
         wd.find_element(By.NAME, "update").click()
         self.return_to_home_page()
