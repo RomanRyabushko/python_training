@@ -101,7 +101,8 @@ class ContactHelper:
             self.return_to_home_page()
             self.contact_cache = []
             for element in wd.find_elements(By.XPATH, "//*[@name = 'entry']/td[3]"):
-                text = element.text
+                text1 = element.text
+                text2 = element.find_element(By.XPATH, "//*[@name = 'entry']/td[2]").text
                 id = element.find_element(By.XPATH, "//*[@name = 'selected[]']").get_attribute("value")
-                self.contact_cache.append(Contact(firstname=text, id=id))
+                self.contact_cache.append(Contact(firstname=text1, lastname=text2, id=id))
         return list(self.contact_cache)
