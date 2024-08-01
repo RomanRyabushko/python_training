@@ -52,6 +52,11 @@ class ContactHelper:
         wd = self.app.wd
         wd.find_elements(By.NAME, "selected[]")[index].click()
 
+    def select_edit_contact_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements(By.XPATH, "//*[@alt='Edit']")[index].click()
+        #wd.find_elements(By.NAME, "selected[]")[index].click()
+
     def change_field_value(self, field_name, text):
         wd = self.app.wd
         if text is not None:
@@ -80,8 +85,9 @@ class ContactHelper:
         wd = self.app.wd
         self.return_to_home_page()
         wd.find_element(By.XPATH, "//*[text() = 'home']")
+        self.select_edit_contact_by_index(index)
         index = str(index)
-        wd.find_element(By.XPATH, "(//*[@title= 'Edit' and @alt= 'Edit'])["+index+"]").click()
+        print(index + " = index!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         self.fill_contact_form(new_contact_data)
         wd.find_element(By.NAME, "update").click()
         self.return_to_home_page()
