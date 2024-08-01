@@ -55,7 +55,6 @@ class ContactHelper:
     def select_edit_contact_by_index(self, index):
         wd = self.app.wd
         wd.find_elements(By.XPATH, "//*[@alt='Edit']")[index].click()
-        #wd.find_elements(By.NAME, "selected[]")[index].click()
 
     def change_field_value(self, field_name, text):
         wd = self.app.wd
