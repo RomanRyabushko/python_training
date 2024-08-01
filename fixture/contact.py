@@ -86,8 +86,6 @@ class ContactHelper:
         self.return_to_home_page()
         wd.find_element(By.XPATH, "//*[text() = 'home']")
         self.select_edit_contact_by_index(index)
-        index = str(index)
-        print(index + " = index!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         self.fill_contact_form(new_contact_data)
         wd.find_element(By.NAME, "update").click()
         self.return_to_home_page()
