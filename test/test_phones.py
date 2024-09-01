@@ -17,8 +17,8 @@ def test_all_contact_info_on_home_page(app):
 def test_all_contact_info_on_contact_view_page(app):
     all_contacts = app.contact.get_contact_list()
     index = randrange(len(all_contacts))
-    contact_from_view_page = app.contact.get_contact_from_view_page(index)
     contact_from_edit_page = app.contact.get_contact_info_from_edit_page(index)
+    contact_from_view_page = app.contact.get_contact_from_view_page(index)
     assert contact_from_view_page.homephone == contact_from_edit_page.homephone
     assert contact_from_view_page.workphone == contact_from_edit_page.workphone
     assert contact_from_view_page.mobilephone == contact_from_edit_page.mobilephone

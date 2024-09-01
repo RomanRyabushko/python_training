@@ -176,6 +176,7 @@ class ContactHelper:
         secondaryphone = re.search("P: (.*)", text).group(1)
         for element in wd.find_elements(By.ID, 'content'):
             email = element.find_element(By.TAG_NAME, 'a').text
+            print(email)
             full_name = '\n'.join(text.split()[0:3])
         return Contact(homephone=homephone, mobilephone=mobilephone,
                        workphone=workphone, secondaryphone=secondaryphone, full_name=full_name, email_=email)
