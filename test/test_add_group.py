@@ -10,7 +10,6 @@ def random_string(prefix, maxlen):
                + " "*10)
     return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
-
 #testdata = [
 #    Group(name=name, header=header, footer=footer)
 #    for name in ["", random_string("name", 10)]
